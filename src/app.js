@@ -1,18 +1,19 @@
+/* eslint-disable consistent-return */
 const express = require("express");
+const http = require("http");
+const routes = require("./routes");
 
-class AppController {
-    constructor() {
-        this.express = express();
+const app = express();
+const httpServer = http.Server(app);
 
-        this.middlewares();
-        this.routes();
-    }
+app.use(express.json());
+app.use(routes);
 
-    middlewares() {
-        this.express.use(express.json());
-    }
-    routes() {
-        this.express.use(require("./routes"));
-    }
+const port = process.env.PORT || 3333;
+
+if (process.env.NODE_ENV !== "test") {
+    httpServer.listen(port, () => {
+        console.log(`Porta ${port}`);
+    });
 }
-module.exports = new AppController().express;
+module.exports = app;

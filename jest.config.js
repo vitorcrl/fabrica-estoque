@@ -3,6 +3,21 @@
  * https://jestjs.io/docs/configuration
  */
 
+/** @type {import('@ts-jest/dist/types').InitialOptionsTsJest} */
+module.exports = {
+    preset: "ts-jest",
+    testEnvironment: "node",
+    globals: {
+        "ts-jest": {
+            isolatedModules: true,
+        },
+    },
+    transform: {
+        "^.+\\.jsx?$": "babel-jest",
+    },
+    moduleNameMapper: {},
+    moduleDirectories: ["js", ".", "node_modules"],
+};
 module.exports = {
     // All imported modules in your tests should be mocked automatically
     // automock: false,
@@ -146,10 +161,10 @@ module.exports = {
     // testLocationInResults: false,
 
     // The glob patterns Jest uses to detect test files
-    // testMatch: [
-    //   "**/__tests__/**/*.[jt]s?(x)",
-    //   "**/?(*.)+(spec|test).[tj]s?(x)"
-    // ],
+    testMatch: [
+        "**/__tests__/**/*.test.js?(x)",
+        "**/?(*.)+(spec|test).test.js?(x)",
+    ],
 
     // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
     // testPathIgnorePatterns: [
