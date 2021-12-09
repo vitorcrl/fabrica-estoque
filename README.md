@@ -24,6 +24,12 @@ docker start docker
 code .
 ```
 
+-   Criação de Migrations from Database Postgres.
+
+```tsx
+yarn sequelize db:migrate
+```
+
 -   Instalação de dependencias
 
 ```tsx
@@ -36,10 +42,10 @@ yarn init
 yarn start
 ```
 
--   Criação de Migrations from Database Postgres.
+-   Iniciar TDD
 
 ```tsx
-yarn sequelize db:migrate
+yarn test
 ```
 
 ## 🏭 Funcionalidades
