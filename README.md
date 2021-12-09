@@ -7,7 +7,7 @@ Api que Gerencia um estoque da Fabrica de bolos.
 -   Clonar o Repositório
 
 ```tsx
-git clone https://github.com/vitorcrl/Api-estoque.git
+git clone https://github.com/vitorcrl/fabrica-estoque.git
 ```
 
 -   Criar container no docker

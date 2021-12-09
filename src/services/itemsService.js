@@ -29,7 +29,6 @@ const getItems = async ({ name }) => {
             WHERE name = $1`,
             [name]
         );
-        //    console.log(error);
         await connection.end();
         return;
     } catch (error) {
