@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const createUser = require("./services/userService");
 const checkUser = require("./services/userService");
+const createItems = require("./services/itemsService");
 const routes = Router();
 
 routes.post("/", (req, res) => res.send("Fabrica"));
@@ -29,19 +30,17 @@ routes.post("/users", async (req, res) => {
 // Rota de itens
 routes.post("/registeritems", async (req, res) => {
     try {
-        const { name, quantity, user } = req.body;
-        const userExists = await checkUser({ user, password_hash });
+        const { name, quantity, user, createddate } = req.body;
 
-        if (userExists) {
-            return res
-                .status(409)
-                .send({ message: "This user name is already in use" });
-        }
+        const registerItems = await createItems({
+            name,
+            quantity,
+            user,
+            createddate,
+        });
+        console.log(registerItems);
 
-        const users = await createUser({ user, password_hash });
-        console.log(users);
-
-        return res.status(201).send({ message: "Created", user });
+        return res.status(201).send({ message: "Created", name });
     } catch (error) {
         console.error(error);
         return res.status(400).json({ error: error.message });

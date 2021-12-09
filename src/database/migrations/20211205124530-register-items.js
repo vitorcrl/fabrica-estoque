@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        return queryInterface.createTable("register-items", {
+        return queryInterface.createTable("registeritems", {
             id: {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
@@ -22,7 +22,7 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: false,
             },
-            createdDate: {
+            createddate: {
                 type: Sequelize.DATE,
                 allowNull: false,
             },
@@ -30,7 +30,7 @@ module.exports = {
     },
 
     down: async (queryInterface, Sequelize) => {
-        return queryInterface.dropTable("register-items");
+        return queryInterface.dropTable("registeritems");
 
         /**
          * Add reverting commands here.

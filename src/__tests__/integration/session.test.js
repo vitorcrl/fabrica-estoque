@@ -24,15 +24,13 @@ describe("Authenticate", () => {
     });
     it("Verificar se o usuario ja existe", async () => {
         const checkUser = { user: "vitor", password_hash: "12345" };
-
+        await checkUser;
         await request(app)
             .post("/users")
             .send(checkUser)
             .expect(409)
             .then((res) => {
-                expect(res.body.message).toBe(
-                    "This user name is already in use"
-                );
+                expect(res.body.message).toBe("This Name is already in use");
             });
     });
 });
