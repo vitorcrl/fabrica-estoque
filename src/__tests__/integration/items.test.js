@@ -8,11 +8,11 @@ describe("Cadastro de itens", () => {
     beforeEach(async () => {
         await createConnection();
     });
-    // afterEach(async () => {
-    //     await truncate();
-    // });
+    afterEach(async () => {
+        await truncate();
+    });
 
-    it("Cadastrar itens", async () => {
+    it("Cadastrar items", async () => {
         const createItems = {
             name: "farinha de trigo",
             quantity: "10",
@@ -27,17 +27,4 @@ describe("Cadastro de itens", () => {
                 expect(res.body.message).toBe("Created");
             });
     });
-    // it("Verificar se o usuario ja existe, para pesquisa", async () => {
-    //     const checkUser = { user: "vitor", password_hash: "12345" };
-
-    //     await request(app)
-    //         .post("/users")
-    //         .send(checkUser)
-    //         .expect(409)
-    //         .then((res) => {
-    //             expect(res.body.message).toBe(
-    //                 "This user name is already in use"
-    //             );
-    // //         });
-    // });
 });

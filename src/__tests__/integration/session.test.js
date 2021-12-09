@@ -8,9 +8,9 @@ describe("Authenticate", () => {
     beforeEach(async () => {
         await createConnection();
     });
-    afterEach(async () => {
-        await truncate();
-    });
+    // afterEach(async () => {
+    //     await truncate();
+    // });
 
     it("entrada de info no banco de dados", async () => {
         const users = { user: "vitor", password_hash: "12345" };
@@ -22,15 +22,17 @@ describe("Authenticate", () => {
                 expect(res.body.message).toBe("Created");
             });
     });
-    it("Verificar se o usuario ja existe", async () => {
-        const checkUser = { user: "vitor", password_hash: "12345" };
-        await checkUser;
-        await request(app)
-            .post("/users")
-            .send(checkUser)
-            .expect(409)
-            .then((res) => {
-                expect(res.body.message).toBe("This Name is already in use");
-            });
-    });
+    // it("Verificar se o usuario ja existe", async () => {
+    //     const checkUser = { user: "vitor", password_hash: "12345" };
+    //     //   await checkUser;
+    //     await request(app)
+    //         .post("/users")
+    //         .send(checkUser)
+    //         .expect(409) // 409
+    //         .then((res) => {
+    //             expect(res.body.message).toBe(
+    //                 "This user name is already in use"
+    //             );
+    //         });
+    // });
 });

@@ -2,9 +2,9 @@ const { Router } = require("express");
 const createUser = require("./services/userService");
 const checkUser = require("./services/userService");
 const createItems = require("./services/itemsService");
+// const { loginService } = require("./services/loginService");
 const routes = Router();
 
-routes.post("/", (req, res) => res.send("Fabrica"));
 //Rota Usuarios
 routes.post("/users", async (req, res) => {
     try {
@@ -12,13 +12,13 @@ routes.post("/users", async (req, res) => {
         const userExists = await checkUser({ user, password_hash });
 
         if (userExists) {
+            //         console.log(userExists);
             return res
                 .status(409)
                 .send({ message: "This user name is already in use" });
         }
 
         const users = await createUser({ user, password_hash });
-        console.log(users);
 
         return res.status(201).send({ message: "Created", user });
     } catch (error) {
@@ -26,6 +26,7 @@ routes.post("/users", async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 });
+// Rota de login
 
 // Rota de itens
 routes.post("/registeritems", async (req, res) => {
@@ -42,9 +43,21 @@ routes.post("/registeritems", async (req, res) => {
 
         return res.status(201).send({ message: "Created", name });
     } catch (error) {
-        console.error(error);
         return res.status(400).json({ error: error.message });
     }
 });
+routes.get("/registeritems", async (req, res) => {
+    try {
+        const { name } = req.body;
+        const showItems = await getItems({
+            name,
+        });
+        console.log(showItems);
+        return res.status(200).send({ message: "items" });
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+});
+//routes.put("/registeritems:id", itemUpdate.update);
 
 module.exports = routes;

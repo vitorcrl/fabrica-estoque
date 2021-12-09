@@ -5,7 +5,7 @@ const createUser = async ({ user, password_hash }) => {
     try {
         const connection = await createConnection();
         await connection.connect();
-        console.log(`conectou`);
+        // console.log(`conectou`);
         await connection.query(
             `INSERT INTO users ("user", password_hash) values
             ($1, $2) RETURNING *  `,
@@ -23,21 +23,19 @@ const checkUser = async (user) => {
         const connection = await createConnection();
         await connection.connect();
         console.log("foi conectado");
-        await connection.query(
-            `SELECT 
-				* 
-			FROM 
-				users tu
-			WHERE 
-				user = ?`,
+        const rows = await connection.query(
+            `SELECT *
+             FROM users tu
+             WHERE tu.user = ?`,
             [user]
         );
         await connection.end();
-        return;
+        return rows;
     } catch (error) {
         console.log(error);
         throw new Error("Erro ao pesquisar usuario");
     }
 };
+
 module.exports = checkUser;
 module.exports = createUser;
