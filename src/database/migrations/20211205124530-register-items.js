@@ -6,7 +6,6 @@ module.exports = {
                 type: Sequelize.INTEGER,
                 primaryKey: true,
                 autoIncrement: true,
-                //   generationStrategy: Sequelize.UUID,
                 allowNull: false,
             },
             name: {
@@ -31,12 +30,5 @@ module.exports = {
 
     down: async (queryInterface, Sequelize) => {
         return queryInterface.dropTable("registeritems");
-
-        /**
-         * Add reverting commands here.
-         *
-         * Example:
-         * await queryInterface.dropTable('users');
-         */
     },
 };
