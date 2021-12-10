@@ -2,7 +2,8 @@ const { Router } = require("express");
 const createUser = require("./services/userService");
 const checkUser = require("./services/userService");
 const createItems = require("./services/itemsService");
-// const { loginService } = require("./services/loginService");
+const itemUpdate = require("./services/updateService");
+const getItems = require("./services/getItemService");
 const routes = Router();
 
 //Rota Usuarios
@@ -26,8 +27,6 @@ routes.post("/users", async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 });
-// Rota de login
-
 // Rota de itens
 routes.post("/registeritems", async (req, res) => {
     try {
@@ -46,18 +45,31 @@ routes.post("/registeritems", async (req, res) => {
         return res.status(400).json({ error: error.message });
     }
 });
-routes.get("/registeritems", async (req, res) => {
+routes.get("/consultItems", async (req, res) => {
     try {
-        const { name } = req.body;
-        const showItems = await getItems({
-            name,
-        });
+        const { user } = req.body;
+        const showItems = await getItems({ user });
         console.log(showItems);
         return res.status(200).send({ message: "items" });
     } catch (error) {
         return res.status(400).json({ error: error.message });
     }
 });
-//routes.put("/registeritems:id", itemUpdate.update);
+
+routes.patch("/atualizateitem", async (req, res) => {
+    try {
+        const { name, quantity, user, id } = req.body;
+        const attItem = await itemUpdate({
+            name,
+            quantity,
+            user,
+            id,
+        });
+        console.log(attItem);
+        return res.status(200).send({ message: "items Updated" });
+    } catch (error) {
+        return res.status(400).json({ error: error.message });
+    }
+});
 
 module.exports = routes;
